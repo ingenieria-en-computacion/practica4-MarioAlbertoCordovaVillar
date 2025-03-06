@@ -19,7 +19,7 @@ int main(){
 
         printf("Aumentando el espacio reservado al doble\n");
         num *=2;
-        arreglo2 = (int*)realloc(arreglo, num*sizeof(int));
+        arreglo2 = (int*)realloc(arreglo, num*sizeof(int)); // modifica el tamaño de un arreglo, recibe la zona de memoria donde se reservo inicialmente, segundo dato; el nuevo tamaño
         if(arreglo2 != NULL){ 
             arreglo = arreglo2;       
             for(; cont <num; cont++){
@@ -31,11 +31,16 @@ int main(){
                 printf("\t%d", *(arreglo2 + cont));            
             }
             printf("\t]\n");    
-            
+            arreglo2 = (int*)realloc(arreglo, 2*sizeof(int));    //linea para reducir el tamaño de el arreglo
+             printf("Vector reservado:\n\t[");
+            for(cont =0; cont <2; cont++){
+                printf("\t%d", *(arreglo2 + cont));            
+            }
         }
         printf("Liberando el espacio reservado\n");
 
-        free(arreglo);        
+        free(arreglo);    
+        arreglo= arreglo2= NULL;    
     }
     return 0;
 }
